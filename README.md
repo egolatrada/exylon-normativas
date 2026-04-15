@@ -8,19 +8,26 @@ En **Google Sites** no puedes subir una carpeta con varios `.html` enlazados com
 
 ## Publicar con GitHub Pages
 
-1. Crea en GitHub un repositorio **vacío** (sin README), por ejemplo `normativa-exylon`.
-2. En esta carpeta (`Whatsapp Trabajo`), ejecuta (cambia `TU_USUARIO` y el nombre del repo):
+1. Crea en GitHub un repositorio **vacío** (sin README) si aún no existe, por ejemplo `exylon-normativas`.
+2. En esta carpeta (`Whatsapp Trabajo`), el remoto debe apuntar a tu repo. Si ya existe `origin` con otra URL:
 
    ```bash
-   git remote add origin https://github.com/TU_USUARIO/normativa-exylon.git
+   git remote set-url origin https://github.com/egolatrada/exylon-normativas.git
    git branch -M main
+   git push -u origin main
+   ```
+
+   Si **no** tenías `origin`, entonces:
+
+   ```bash
+   git remote add origin https://github.com/egolatrada/exylon-normativas.git
    git push -u origin main
    ```
 
 3. En GitHub: **Settings → Pages → Build and deployment → Source**: elige **Deploy from a branch**, rama **main**, carpeta **/ (root)**. Guarda.
 4. En unos minutos tendrás una URL del tipo:
 
-   `https://TU_USUARIO.github.io/normativa-exylon/`
+   `https://egolatrada.github.io/exylon-normativas/`
 
    La página principal será `index.html`.
 
