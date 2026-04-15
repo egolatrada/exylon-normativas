@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <title>Normativa de talleres</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #000000;
+      --bg-card: #111111;
+      --text: #f4f4f6;
+      --text-soft: #c4c4ce;
+      --muted: #6e6e78;
+      --accent: #850e49;
+      --accent-glow: rgba(133, 14, 73, 0.55);
+      --border: rgba(133, 14, 73, 0.38);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(ellipse 95% 80% at 92% -8%, rgba(133, 14, 73, 0.62) 0%, transparent 50%),
+        radial-gradient(ellipse 55% 50% at -5% 102%, rgba(133, 14, 73, 0.2) 0%, transparent 55%),
+        linear-gradient(148deg, #000000 0%, #060204 38%, #120610 72%, #2a0618 100%);
+      line-height: 1.62;
+      position: relative;
+    }
+
+    .scene {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .scene-x {
+      position: absolute;
+      left: -18vw;
+      top: 50%;
+      width: min(115vh, 820px);
+      height: min(115vh, 820px);
+      transform: translateY(-50%);
+      opacity: 0.085;
+    }
+
+    .scene-x span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 140%;
+      height: 12%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.08));
+      border-radius: 3px;
+      transform-origin: center;
+    }
+
+    .scene-x span:first-child {
+      transform: translate(-50%, -50%) rotate(-50deg);
+    }
+
+    .scene-x span:last-child {
+      transform: translate(-50%, -50%) rotate(50deg);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.16;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.28;
+      background-image:
+        radial-gradient(circle, rgba(133, 14, 73, 0.4) 1px, transparent 2px),
+        radial-gradient(circle, rgba(133, 14, 73, 0.18) 1px, transparent 2px);
+      background-size: 100px 120px, 160px 190px;
+      background-position: 0 0, 55px 70px;
+    }
+
+    header,
+    main,
+    footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    header {
+      text-align: center;
+      padding: 2.5rem 1.5rem 2.4rem;
+      background: linear-gradient(180deg, rgba(133, 14, 73, 0.35) 0%, rgba(0, 0, 0, 0.4) 52%, #000000 100%);
+      border-bottom: 1px solid rgba(133, 14, 73, 0.4);
+      box-shadow: 0 24px 120px rgba(133, 14, 73, 0.12);
+    }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin: 0 0 1rem;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.38);
+    }
+
+    .kicker::before,
+    .kicker::after {
+      content: "";
+      flex: 0 1 2.5rem;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+    }
+
+    .brand-lockup {
+      margin: 0 0 0.35rem;
+      font-size: clamp(1.85rem, 7vw, 3.1rem);
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.94);
+      text-shadow: 0 0 48px rgba(133, 14, 73, 0.55);
+    }
+
+    header h1 {
+      margin: 0 0 0.45rem;
+      font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .header-tagline {
+      margin: 0 0 0.85rem;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.42);
+    }
+
+    .header-desc {
+      margin: 0 auto;
+      max-width: 38rem;
+      font-size: 0.88rem;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--text-soft);
+      letter-spacing: 0.04em;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-top: 1.65rem;
+    }
+
+    .site-nav a {
+      display: inline-block;
+      padding: 0.5rem 1.35rem;
+      border-radius: 2px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.78);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      transition: color 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .site-nav a:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 0 0 1px rgba(133, 14, 73, 0.35), 0 0 28px rgba(133, 14, 73, 0.2);
+      background: rgba(133, 14, 73, 0.12);
+    }
+
+    .site-nav a[aria-current="page"] {
+      color: #fff;
+      border-color: var(--accent);
+      background: rgba(133, 14, 73, 0.22);
+      box-shadow: 0 0 36px rgba(133, 14, 73, 0.35);
+    }
+
+    main {
+      max-width: 52rem;
+      margin: 2.25rem auto 3.5rem;
+      padding: 0 1rem;
+    }
+
+    article {
+      background: rgba(12, 12, 14, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(133, 14, 73, 0.32);
+      border-radius: 6px;
+      padding: 2rem 1.65rem 2.25rem;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 0 0 1px rgba(0, 0, 0, 0.75),
+        0 32px 100px rgba(0, 0, 0, 0.75);
+    }
+
+    nav.toc {
+      margin-bottom: 2.25rem;
+      padding: 1.1rem 1.15rem;
+      background: rgba(133, 14, 73, 0.07);
+      border: 1px solid rgba(133, 14, 73, 0.28);
+      border-radius: 8px;
+    }
+
+    nav.toc strong {
+      display: block;
+      margin-bottom: 0.7rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    nav.toc ol {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
+
+    nav.toc a {
+      color: #e8c4d6;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    nav.toc a:hover {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    section {
+      margin-bottom: 2.15rem;
+      scroll-margin-top: 1.25rem;
+    }
+
+    section:last-child { margin-bottom: 0; }
+
+    h2 {
+      font-size: 1.02rem;
+      margin: 0 0 0.9rem;
+      font-weight: 600;
+      line-height: 1.32;
+      letter-spacing: 0.02em;
+      color: #f0d4e4;
+      padding-bottom: 0.45rem;
+      border-bottom: 1px solid rgba(133, 14, 73, 0.45);
+      text-shadow: 0 0 22px rgba(133, 14, 73, 0.35);
+    }
+
+    h3 {
+      font-size: 0.95rem;
+      margin: 1.15rem 0 0.5rem;
+      font-weight: 600;
+      color: #fafafa;
+      letter-spacing: 0.01em;
+    }
+
+    h3:first-of-type { margin-top: 0; }
+
+    p,
+    ul {
+      margin: 0 0 0.7rem;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    ul { padding-left: 1.25rem; }
+
+    li { margin-bottom: 0.38rem; }
+
+    strong {
+      color: #f5e0eb;
+      font-weight: 600;
+    }
+
+    .block {
+      margin: 0.55rem 0 0.85rem;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(90deg, rgba(133, 14, 73, 0.12) 0%, rgba(0, 0, 0, 0.2) 100%);
+      border: 1px solid rgba(133, 14, 73, 0.25);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.93rem;
+    }
+
+    .block p { color: var(--text-soft); }
+
+    .block p:last-child { margin-bottom: 0; }
+
+    footer {
+      text-align: center;
+      padding: 0 1rem 2.5rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    footer time { color: #8a7082; }
+  </style>
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="scene-x"><span></span><span></span></div>
+  </div>
+  <header>
+    <p class="kicker">Normativa</p>
+    <p class="brand-lockup">EXYLON</p>
+    <h1>Normativa de talleres</h1>
+    <p class="header-tagline">Roleplay · talleres</p>
+    <p class="header-desc">Mecánica, grúa, personal, economía, eventos y niveles del taller.</p>
+    <nav class="site-nav" aria-label="Tipo de normativa">
+      <a href="normativa-negocios.html">Comercios</a>
+      <a href="normativa-talleres.html" aria-current="page">Talleres</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <nav class="toc" aria-label="Índice">
+        <strong>Índice</strong>
+        <ol>
+          <li><a href="#cap-1">Disposiciones generales y organización del taller</a></li>
+          <li><a href="#cap-2">Gestión del personal y niveles</a></li>
+          <li><a href="#cap-3">Funcionamiento diario y gestión de servicios</a></li>
+          <li><a href="#cap-4">Funciones especiales del taller</a></li>
+          <li><a href="#cap-5">Economía y facturación</a></li>
+          <li><a href="#cap-6">Seguridad y cámaras</a></li>
+          <li><a href="#cap-7">Conflictos de rol y actos delictivos</a></li>
+          <li><a href="#cap-8">Eventos y publicidad</a></li>
+          <li><a href="#cap-9">Sanciones</a></li>
+          <li><a href="#cap-10">Sistema de niveles</a></li>
+          <li><a href="#cap-11">Reglamentación y recordatorios técnicos</a></li>
+        </ol>
+      </nav>
+
+      <section id="cap-1">
+        <h2>1. Disposiciones generales y organización del taller</h2>
+
+        <h3>1.1. Regulación del personal</h3>
+        <ul>
+          <li>Ningún taller podrá iniciar su actividad hasta que el titular y los empleados estén dentro del Discord de Comercios, con su rol correctamente asignado y el nombre IC configurado como apodo.</li>
+          <li>El número máximo de empleados fijos permitido al iniciar será de 5 personas, jefe incluido.</li>
+          <li>El cargo de Jefe de cualquier negocio debe ser ocupado exclusivamente por un ciudadano en estado civil o, en su defecto, por un miembro «no oficial» de una banda.</li>
+          <li>Miembros oficiales de banda pueden ocupar cargos altos, pero la titularidad y responsabilidad legal debe recaer sobre un perfil civil.</li>
+        </ul>
+
+        <h3>1.2. Coherencia de rol</h3>
+        <ul>
+          <li>Todas las interacciones, incluyendo reparaciones, tuneos, ventas y servicios, deben rolearse de forma coherente. No se permite usar únicamente las mecánicas del juego sin el rol correspondiente.</li>
+          <li>Esto significa que, incluso para un tuneo rápido, debe haber una breve interpretación de la acción (un saludo, una explicación del trabajo, etc.).</li>
+          <li>El trato debe basarse en una interpretación clara, visible y acorde al entorno del mecánico.</li>
+          <li>Cada taller tiene el derecho de solicitar y elegir un ítem especial de colección único para su local (como llaveros, peluches o chapas) para potenciar su marca.</li>
+        </ul>
+
+        <h3>1.3. Regulación de convenios y alianzas</h3>
+        <p>Este punto establece el marco legal para las alianzas estratégicas entre el taller y otros comercios de la ciudad. Estos acuerdos deben regirse por las siguientes reglas:</p>
+        <ul>
+          <li>Está estrictamente prohibido firmar convenios entre negocios que pertenezcan al mismo gremio.</li>
+          <li>Todos los intercambios derivados del convenio deben ser equilibrados, estar debidamente justificados y quedar registrados en el canal de economía de Discord únicamente subiendo foto del contrato.</li>
+          <li>El documento debe especificar claramente los beneficios (descuentos, prioridades de servicio) y el motivo del intercambio, asegurando que sea una relación equilibrada.</li>
+          <li>Todo convenio debe constar de un documento firmado por ambas partes, detallando los beneficios mutuos y la duración del acuerdo.</li>
+        </ul>
+      </section>
+
+      <section id="cap-2">
+        <h2>2. Gestión del personal y niveles</h2>
+
+        <h3>2.1. Estructura de rangos y salarios</h3>
+        <p>La estructura salarial del taller se ajusta a los límites de:</p>
+        <ul>
+          <li><strong>Jefe:</strong> 1 (2 bajo previa aprobación) – 450$</li>
+          <li><strong>Gerente:</strong> máximo 2 – 375$</li>
+          <li><strong>Supervisor:</strong> máximo 2 (solo si se requiere) – 300$</li>
+          <li><strong>Mecánico</strong> – 250$</li>
+          <li><strong>Aprendiz</strong> – 174$ (mínimo 1 semana de formación)</li>
+        </ul>
+        <p>Los ascensos deben ser progresivos y motivados por actividad constante y buen comportamiento. Está prohibido asignar rangos de Gerente o Supervisor de forma inmediata.</p>
+
+        <h3>2.2. Control de asistencia y despidos</h3>
+        <ul>
+          <li>Cada empleado debe cumplir 7 horas semanales de actividad.</li>
+          <li>Ausentarse más de 3 días sin justificación permite el despido sin compensación económica.</li>
+          <li>Tras 3 avisos registrados en el canal específico, el trabajador puede ser despedido sin indemnización.</li>
+          <li>Un despido sin causa coherente o aviso previo se podría solicitar una indemnización; en caso contrario, podría llegar a términos judiciales.</li>
+        </ul>
+      </section>
+
+      <section id="cap-3">
+        <h2>3. Funcionamiento diario y gestión de servicios</h2>
+
+        <h3>3.1. Normas de turnos</h3>
+        <ul>
+          <li>Todo trabajador debe cumplir un turno mínimo de 30 minutos continuos.</li>
+          <li>Está prohibido fichar solo para realizar un trabajo específico y retirarse sin completar el tiempo mínimo establecido. Solo se podrá salir antes si la ausencia está justificada por motivos externos.</li>
+          <li>Es obligatorio fichar al entrar y salir de servicio mediante la tablet.</li>
+          <li>Está estrictamente prohibido permanecer AFK mientras se esté de servicio. Solo se permiten pausas justificadas de un máximo de 5 minutos.</li>
+          <li>No se permite entrar y salir constantemente de servicio para evitar conflictos de rol (robos, persecuciones). Está prohibido ponerse de servicio para evadir roles delictivos o policiales, ya que se considerará evasión de rol y será debidamente sancionado.</li>
+          <li>El personal debe vestir la indumentaria oficial del taller de manera obligatoria al iniciar el turno.</li>
+        </ul>
+
+        <h3>3.2. Actividad en el local</h3>
+        <ul>
+          <li>El mecánico debe permanecer en el taller durante el servicio. Se puede abandonar el establecimiento únicamente por motivos laborales o justificados (entregas, eventos propios, etc.).</li>
+          <li>El taller no puede anunciarse como abierto si no hay mecánicos disponibles para atender al público.</li>
+        </ul>
+      </section>
+
+      <section id="cap-4">
+        <h2>4. Funciones especiales del taller</h2>
+
+        <h3>4.1. Registro y regulación de trabajos</h3>
+        <p>Todos los trabajos (reparaciones, tuneos, modificaciones) deben registrarse en el apartado de documentos de la tablet de negocios, utilizando una plantilla que incluya la siguiente información:</p>
+        <ul>
+          <li>Modelo del vehículo</li>
+          <li>Tipo de trabajo realizado</li>
+          <li>Importe facturado (especificar si aplica convenio)</li>
+          <li>Cliente especial/facción (adjudicar placa y si aplica)</li>
+        </ul>
+        <ul>
+          <li>Las reparaciones rápidas sin rol o sin registro serán consideradas incumplimiento. Todo servicio debe generar rol y quedar documentado.</li>
+          <li>Ningún mecánico, incluido el jefe, puede reparar o tunear vehículos estando fuera de servicio. Debe realizarse exclusivamente estando de servicio.</li>
+        </ul>
+
+        <h3>4.2. Regulación de vehículos y tuneo</h3>
+        <p>Está prohibido tunear:</p>
+        <ul>
+          <li>Vehículos oficiales sin autorización expresa.</li>
+          <li>Vehículos ajenos; es obligatorio acreditar la propiedad, pero esta información no podrá ser utilizada ni registrada para beneficio propio en otros roles.</li>
+        </ul>
+        <ul>
+          <li>Ni empleado ni jefe podrá tunear su propio vehículo. Deberá hacerlo otro trabajador o en otro taller.</li>
+          <li>Esto conlleva pagar las tasas de pago tanto de reparación como de tuneo, y se le podrá aplicar hasta un máximo del 20% de descuento por ser trabajador del taller.</li>
+        </ul>
+
+        <h3>4.3. Servicio de grúa y asistencia en carretera</h3>
+        <p>Este servicio permite a los mecánicos socorrer vehículos averiados o accidentados fuera del establecimiento bajo las siguientes condiciones:</p>
+        <ul>
+          <li>Para activar el servicio de grúa, es obligatorio que haya un mínimo de 2 empleados en servicio. Esto evita que el taller físico quede desatendido.</li>
+          <li>El servicio fuera del taller tendrá un coste adicional que se calculará como un recargo de 30$/km, siendo el 50% de este coste extra un bono para el repartidor.</li>
+          <li>Los talleres están autorizados a establecer convenios oficiales con facciones del estado. Estos acuerdos pueden incluir descuentos específicos o prioridades de despacho, siempre que queden registrados en la tablet.</li>
+          <li>Todo servicio de grúa, ya sea por convenio o servicio particular, debe registrarse en la tablet detallando modelo, trabajo realizado e importe total.</li>
+        </ul>
+
+        <h3>4.4. Uso de recursos del taller</h3>
+        <ul>
+          <li>Prohibido usar cualquier material del taller si no se está en servicio. Esta venta está prohibida, salvo que sean artículos comercializados oficialmente.</li>
+          <li>Los vehículos de empresa solo deben usarse para tareas estrictamente laborales (repartos, compras de stock, eventos, gestiones internas). Su uso personal será sancionable.</li>
+        </ul>
+      </section>
+
+      <section id="cap-5">
+        <h2>5. Economía y facturación</h2>
+
+        <h3>5.1. Obligaciones de facturación</h3>
+        <ul>
+          <li>El canal de Discord destinado a la economía debe actualizarse al menos una vez por semana (captura de la tablet y estado financiero). Esto es un deber del jefe o encargado designado por el jefe.</li>
+          <li>Todo movimiento económico relevante (retiros, compras grandes, premios) debe incluir captura del antes/después, justificación clara y registro en Discord.</li>
+          <li>Todas las ventas deben realizarse mediante factura. No está permitido recibir pagos en efectivo ni transferencias directas sin registro.</li>
+        </ul>
+
+        <h3>5.3. Bonus opcionales por rendimiento</h3>
+        <ul>
+          <li>Los bonus son opcionales y se otorgan únicamente a los 3 mecánicos con el mejor rendimiento de la semana. El objetivo es incentivar el esfuerzo superior.</li>
+          <li>Se sugiere un máximo de $70 extra por hora trabajada pasadas las 7 horas requeridas semanalmente, evitando que este bonus se confunda con el salario base. En caso de querer dar otro bono extra se podrá dar únicamente al empleado con mayor rendimiento de la semana; el máximo será de 500$.</li>
+          <li>Las solicitudes de bonus requieren registro en Discord (nombre, horas trabajadas, cantidad solicitada).</li>
+        </ul>
+
+        <h3>5.4. Control semanal de fichajes</h3>
+        <ul>
+          <li>Recordatorio de que cada lunes se borrará todo el registro de la semana anterior de fichajes para que tengan control al día para dar estos bonos.</li>
+          <li>En caso de no haber realizado su recuento de horas ni cálculos antes del borrado, no se podrá presentar queja al staff.</li>
+        </ul>
+
+        <h3>5.5. Gestión de ausencias</h3>
+        <p>Si el jefe encargado del recuento no puede estar disponible justo esos días clave, debe avisar a la administración para delegar la responsabilidad en el gerente.</p>
+      </section>
+
+      <section id="cap-6">
+        <h2>6. Seguridad y cámaras</h2>
+
+        <h3>6.1. Cámaras de seguridad</h3>
+        <ul>
+          <li>Solo se pueden rolear cámaras que estén físicamente mapeadas en el local.</li>
+          <li>Está prohibido inventar cámaras inexistentes o exagerar sus capacidades (ángulo, distancia, calidad).</li>
+          <li>Solo los altos cargos pueden acceder, revisar o borrar grabaciones.</li>
+          <li>Se roleará que las grabaciones solo se retienen por un máximo de 72 horas. El borrado o revisión debe hacerse dentro de este plazo.</li>
+          <li>Se podrá rolear el tener una copia de la grabación para usar en un tribunal.</li>
+        </ul>
+
+        <h3>6.2. Personal de seguridad</h3>
+        <ul>
+          <li>El límite de personal de seguridad es de 2 empleados. Se podrá contratar a una empresa, aunque también los propios empleados podrán examinarse para obtener un permiso de armas legal.</li>
+          <li>El equipo básico será de una porra, solo utilizable dentro del local y durante el horario de servicio. Al finalizar el turno, el equipo de seguridad debe dejar todo el material en el almacén o entregarlo al jefe. Prohibido conservar o transportar material fuera de servicio.</li>
+        </ul>
+      </section>
+
+      <section id="cap-7">
+        <h2>7. Conflictos de rol y actos delictivos</h2>
+
+        <h3>7.1. Prohibiciones en servicio</h3>
+        <ul>
+          <li>Está totalmente prohibido cometer cualquier acto delictivo mientras se está de servicio, tanto dentro como en los alrededores o usando vehículos de empresa sin un rol previo.</li>
+          <li>No se puede hacer uso de las armas ilegales ni almacenar objetos ilícitos en el local.</li>
+          <li>Está prohibido secuestrar o robar a trabajadores dentro del taller o en sus inmediaciones directas mientras estén en servicio.</li>
+        </ul>
+      </section>
+
+      <section id="cap-8">
+        <h2>8. Eventos y publicidad</h2>
+
+        <h3>8.1. Regulación de eventos</h3>
+        <ul>
+          <li>Todos los talleres deberán organizar al menos 1 evento mensual.</li>
+          <li>Los eventos deben solicitarse con un mínimo de 72 horas de antelación mediante ticket.</li>
+          <li>Durante un evento, no se permitirá realizar actos delictivos o conflictos que rompan la dinámica, salvo que el evento esté diseñado y pactado específicamente para ello.</li>
+          <li>Cancelar un evento con menos de 24 horas de antelación puede resultar en un strike. No organizar un evento alternativo en el plazo de una semana también es motivo de strike.</li>
+          <li>Podrán colaborar con otros negocios para hacer eventos extras y ganar reputación.</li>
+        </ul>
+
+        <h3>8.2. Avisos de apertura</h3>
+        <ul>
+          <li>Debe respetarse un intervalo mínimo de 10 minutos entre la publicación de anuncios de distintos locales. Esta regla no aplica para anuncios relacionados con la apertura de los locales.</li>
+          <li>No se permite publicar el mismo anuncio de manera abusiva, ya que podría derivar en sanciones.</li>
+          <li>No se permitirá hacer anuncios personalizados mientras haya un evento activo; únicamente se podrá poner el anuncio de apertura.</li>
+        </ul>
+      </section>
+
+      <section id="cap-9">
+        <h2>9. Sanciones</h2>
+
+        <h3>9.1. Aplicación de sanciones a talleres</h3>
+        <ul>
+          <li>Las faltas serán sancionadas económica y administrativamente según su gravedad. El incumplimiento reiterado puede llevar a la expulsión inmediata.</li>
+          <li>Si el taller es retirado por sanción grave o acumulación de strikes, el titular queda inhabilitado para solicitar otro taller hasta que la administración lo autorice expresamente.</li>
+          <li>En caso de que el propietario del negocio haya sido procesado en numerosas ocasiones por la LSPD realizando actos ilícitos, el negocio podrá ser retirado de forma definitiva.</li>
+        </ul>
+
+        <h3>9.2. Escalado de sanciones a empleados</h3>
+        <ol>
+          <li>Advertencia verbal.</li>
+          <li>Sanción económica.</li>
+          <li>Degradación o suspensión.</li>
+          <li>Expulsión definitiva.</li>
+        </ol>
+      </section>
+
+      <section id="cap-10">
+        <h2>10. Sistema de niveles</h2>
+
+        <h3>Nivel 0: Taller de barrio</h3>
+        <div class="block">
+          <p><strong>Capacidad de personal:</strong> máximo 5 empleados (incluyendo al jefe).</p>
+          <p><strong>Estado legal:</strong> licencia provisional sujeta a revisión. Solo se permiten reparaciones básicas y mantenimiento estándar de vehículos.</p>
+          <p><strong>Economía:</strong> exención de impuestos de actividad para fomentar el inicio del taller.</p>
+          <p><strong>Restricciones:</strong> prohibido el servicio de grúa e instalaciones de componentes de alto rendimiento.</p>
+          <p><strong>Objetivo de ascenso:</strong> demostrar viabilidad técnica y facturar un mínimo de $30.000.</p>
+        </div>
+
+        <h3>Nivel 1: Taller emergente</h3>
+        <div class="block">
+          <p><strong>Capacidad de personal:</strong> hasta 7 empleados (incluyendo al jefe).</p>
+          <p><strong>Estado legal:</strong> licencia definitiva de mecánica básica y cambio de neumáticos.</p>
+          <p><strong>Economía:</strong> impuestos reducidos al 10% sobre las facturaciones de reparaciones.</p>
+          <p><strong>Operativa:</strong> venta de repuestos estándar y posibilidad de convenios simples con flotas de transporte (taxistas o repartidores).</p>
+          <p><strong>Objetivo de ascenso:</strong> consolidar clientela y facturar $50.000 adicionales.</p>
+        </div>
+
+        <h3>Nivel 2: Taller reconocido</h3>
+        <div class="block">
+          <p><strong>Capacidad de personal:</strong> hasta 9 empleados (incluyendo al jefe).</p>
+          <p><strong>Marketing:</strong> desbloqueo de merchandising nivel 1 (1 ítem: llaveros o chapas de colección del taller).</p>
+          <p><strong>Especialización:</strong> desbloqueo de mejoras estéticas (pintura, carrocería y neones).</p>
+          <p><strong>Relaciones:</strong> firma de convenios formales con otros negocios para el mantenimiento de flotas comerciales.</p>
+          <p><strong>Objetivo de ascenso:</strong> realizar 1 evento relacionado con el motor y facturar $70.000 adicionales.</p>
+        </div>
+
+        <h3>Nivel 3: Empresa consolidada</h3>
+        <div class="block">
+          <p><strong>Capacidad de personal:</strong> hasta 10 empleados (incluyendo al jefe).</p>
+          <p><strong>Logística:</strong> desbloqueo de licencia de grúa y asistencia en carretera.</p>
+          <p><strong>Especialización:</strong> opción de elegir un «componente de colección» único (ej. motores reforzados o turbos específicos asignados por administración).</p>
+          <p><strong>Estructura interna:</strong> el jefe puede delegar la firma de contratos a su segundo cargo más alto.</p>
+          <p><strong>Objetivo de ascenso:</strong> superar una inspección de seguridad industrial y facturar $100.000 adicionales.</p>
+        </div>
+
+        <h3>Nivel 4: Taller premium</h3>
+        <div class="block">
+          <p><strong>Capacidad de personal:</strong> hasta 11 empleados + 2 slots de seguridad privada.</p>
+          <p><strong>Privilegios:</strong> licencia de servicio de emergencia 24/7.</p>
+          <p><strong>Política:</strong> acceso a convenios oficiales para el mantenimiento de flotas estatales (LSPD/SAED).</p>
+          <p><strong>Objetivo de ascenso:</strong> mantener una reputación impecable y facturar $250.000 adicionales.</p>
+        </div>
+
+        <h3>Nivel 5: Corporación automotriz</h3>
+        <div class="block">
+          <p><strong>Capacidad de personal:</strong> hasta 13 empleados + seguridad privada permanente.</p>
+          <p><strong>Mecánica de poder:</strong> capacidad de influir en normativas de tráfico, vetar leyes sobre modificaciones de vehículos o negociar aranceles de materiales industriales.</p>
+          <p><strong>Riesgo por asociación:</strong> si el taller se vincula con bandas para blindajes ilegales, entra en «riesgo alto» con inspecciones constantes.</p>
+          <p><strong>Derecho de legado:</strong> el negocio puede ser heredado o vendido como sociedad. En caso de traspaso, la administración decidirá si el nuevo dueño desciende de nivel.</p>
+        </div>
+      </section>
+
+      <section id="cap-11">
+        <h2>11. Reglamentación y recordatorios técnicos</h2>
+
+        <h3>I. Gestión de la reputación mecánica</h3>
+        <ul>
+          <li><strong>Calidad de rol:</strong> estar abierto sin público no suma puntos; se valora la calidad de la interpretación en cada reparación y tuneo.</li>
+          <li><strong>Mantenimiento:</strong> a partir del nivel 2, es obligatorio realizar un evento mensual relacionado con el motor para mantener el estatus.</li>
+          <li><strong>Detalle técnico:</strong> se valorará más un rol detallado de motor de 40 minutos que 10 reparaciones rápidas sin interpretación.</li>
+        </ul>
+
+        <h3>II. Operatividad y seguridad industrial</h3>
+        <ul>
+          <li><strong>Horarios:</strong> se recomienda operar principalmente en horas de alta afluencia de tráfico.</li>
+          <li><strong>Proyectos especiales:</strong> fuera de horario comercial, el taller puede usarse para proyectos de restauración de vehículos propios o rodajes de contenido automotriz.</li>
+        </ul>
+
+        <h3>III. Riesgos del sector</h3>
+        <ul>
+          <li><strong>Niveles 0–1:</strong> riesgo bajo. Existe protección administrativa para asegurar el crecimiento inicial del taller.</li>
+          <li><strong>Niveles 2–3:</strong> riesgo medio. Inspecciones de materiales, posibles demandas por reparaciones defectuosas y fuerte competencia de precios.</li>
+          <li><strong>Niveles 4–5:</strong> riesgo alto. El taller se convierte en objetivo estratégico para robo de piezas exclusivas, extorsión por «protección» y conflictos políticos por contratos estatales.</li>
+        </ul>
+
+        <h3>IV. Certificación de maestro mecánico</h3>
+        <ul>
+          <li><strong>Cartas de recomendación:</strong> al finalizar un contrato positivamente, un jefe de nivel 3 o superior puede emitir una «carta de recomendación» oficial.</li>
+          <li><strong>Historial laboral:</strong> este documento refleja la actividad constante y permite al trabajador optar directamente a rangos medios en futuras contrataciones en otros talleres de la ciudad.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    Normativa de talleres · <time datetime="2026-04-15">15 de abril de 2026</time>
+  </footer>
+</body>
+</html>
